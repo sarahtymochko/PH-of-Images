@@ -41,10 +41,4 @@ Feel free to contact me with any questions or issues!
 Sarah Tymochko
 tymochko@egr.msu.edu
 
-Contact: Sarah Tymochko (tymochko@egr.msu.edu)
-
-
-# TITLE
-
- "Insert title name here" (insert link here).
 

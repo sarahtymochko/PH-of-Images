@@ -10,12 +10,14 @@ import skimage
 
 def compute_pers(image, homology_dimensions=[0,1], dgm_format='ripser'):
     '''
+    Computes persistence on the input image using giotto-tda. Returns persistence diagrams in either ripser or giotto format.
+    
     Parameters:
-        image - np.array
-        homology_dimensions - list of dimensions to compute (default is [0,1])
-        dgm_format - string specifying what format you want persistence diagrams returned
-            - 'ripser' - list of arrays like the output of ripser
-            - 'giotto' - array where first two columns are birth and death and third column is the dimension
+        image: np.array
+        homology_dimensions: list of dimensions to compute (default is [0,1])
+        dgm_format: string specifying what format you want persistence diagrams returned
+            - 'ripser': list of arrays like the output of ripser
+            - 'giotto': array where first two columns are birth and death and third column is the dimension
     '''
     
     cubicalpers = CubicalPersistence(homology_dimensions)
@@ -31,9 +33,9 @@ def calc_bottleneck(dgm_a, dgm_b, delta=0):
     Calculate the bottleneck distance between persistence diagrams using giotto
     
     Parameters:
-        dgm_a - persistence diagram in giotto format (note only ONE PH dimension should be included)
-        dgm_b - persistence diagram in giotto format (note only ONE PH dimension should be included)
-        delta - approximation parameter for bottleneck computation
+        dgm_a: persistence diagram in giotto format (note only ONE PH dimension should be included)
+        dgm_b: persistence diagram in giotto format (note only ONE PH dimension should be included)
+        delta: approximation parameter for bottleneck computation
     '''
     
     bndst = PairwiseDistance(metric='bottleneck', metric_params={'delta':delta}) # if delta=0 then bottleneck distance is exact
@@ -102,6 +104,7 @@ def downsample_average(image, block_size, t, nothreshold=False):
         image - np.array of dim 2 or 3
         block_size - size of kernel (kernel is always square of size block_size^dim)
         t - threshold to use to make it binary
+        nothreshold - if True, returns greyscale image where entries are the average value
     '''
     
     dim = len(np.shape(image))
@@ -132,63 +135,6 @@ def downsample_average(image, block_size, t, nothreshold=False):
                        
     return th*1
 
-
-
-
-
-
-
-
-def largest_sphere_diameter(image, leash_length=1):
-    max_kernel = int(np.amax(distance_transform_cdt(image))*2)
-    print(max_kernel)
-    
-    for k in range(max_kernel,1,-1):
-        m = find_leash_length(image, k)
-        
-        if m <= leash_length:
-            return k
-
-    print('Cound not find kernel size for given leash length')
-    return 1
-
-
-def find_leash_length(image, kernel, return_dt=False, plot=False):
-    dim = len(np.shape(image))
-    img_shape = [np.shape(image)[i] for i in range(dim)]
-
-    is_hit = np.zeros(img_shape)
-    kernel_block = [kernel for _ in range(dim)]
-
-    if dim == 2:
-        for i in range(np.shape(image)[0]):
-            for j in range(np.shape(image)[1]):
-                if (image[i:i+kernel, j:j+kernel] == 1).all():
-                    is_hit[i:i+kernel, j:j+kernel] = np.ones(kernel_block)
-    elif dim == 3:
-        for i in range(np.shape(image)[0]):
-            for j in range(np.shape(image)[1]):
-                for j in range(np.shape(image)[2]):
-                    if (image[i:i+kernel, j:j+kernel, k:k+kernel] == 1).all():
-                        is_hit[i:i+kernel, j:j+kernel, k:k+kernel] = np.ones(kernel_block)
-    else:
-        print('Error. Data must be 2 or 3 dimensional.')
-    
-    # Where the kernel DOESNT hit
-    dif = image-is_hit
-    
-    if plot:
-        plt.imshow(dif)
-    
-    # Distance transform 
-    dt = distance_transform_edt((1-is_hit)*-1)
-    
-    dt[dif == 0] = 0
-    
-    if return_dt:
-        return np.amax(dt), dt
-    else:
-        return np.amax(dt)
     
 
 

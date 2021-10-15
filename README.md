@@ -9,7 +9,7 @@ T. Heiss, S. Tymochko, B. Story, A Garin, H. Bui, B. Bleile, and V. Robins. The 
 
 The following examples (some of which are used in the paper) are:
 1. Concentric Rings - `Rings.ipynb`
-2. Disk with Spots - 
+2. Disk with Spots - `Disk_With_ManySpots-Simple.ipynb` (just compute bottleneck distances), `Disk_With_ManySpots-wBounds.ipynb` (compute bottleneck distances and theoretical bounds for comparison)
 
 The majority of the code is contained in the two .py files:
 - generate_examples.py contains code to generate many example images 

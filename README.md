@@ -2,7 +2,10 @@
 
 This repo contains code used in the paper:
 
-T. Heiss, S. Tymochko, B. Story, A Garin, H. Bui, B. Bleile, and V. Robins. The impact of finite resolution on the persistent homology of images. In submission, 2021.
+T. Heiss, S. Tymochko, B. Story, A Garin, H. Bui, B. Bleile, and V. Robins. The impact of finite resolution on the persistent homology of images. Proceedings of 2021 IEEE International Conference on Big Data, 2021. 
+
+ - [Published Version](https://doi.org/10.1109/BigData52589.2021.9671483)
+ - [arXiv Version](https://arxiv.org/abs/2111.05663)
 
 
 ### Code
@@ -30,15 +33,18 @@ The Figs folder contains figures used in the paper as well as the same plots wit
 
 If you use code from this repo, please cite our paper for the methodology as:
 
-bibtex here 
-
+```
+@InProceedings{Heiss2021,
+author={Teresa Heiss and Sarah Tymochko and Brittany Story and Adélie Garin and Hoa Bui and Bea Bleile and Vanessa Robins},
+booktitle={2021 IEEE International Conference on Big Data (Big Data)},
+title={The Impact of Changes in Resolution on the Persistent Homology of Images},
+year={2021},
+pages={3824-3834},
+doi={10.1109/BigData52589.2021.9671483}
+}
+```
 
 
 ### Contact
 
-Feel free to contact me with any questions or issues!
-
-Sarah Tymochko
-tymochko@egr.msu.edu
-
-
+Feel free to contact us with any questions or issues!
